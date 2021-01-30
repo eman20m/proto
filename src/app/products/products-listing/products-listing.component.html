@@ -1,0 +1,94 @@
+<!-- <router-outlet></router-outlet> -->
+
+<div class="container">
+  <!-- filters -->
+  <section class="filters">
+      <!-- search box -->
+      <div class="search-box">
+          <input #searchInput (input)="onSearchHandler(searchInput)" class="search-box__input" placeholder="Search..." type="text" name="txt_search" id="">
+          <button type="submit" class="search-box__btn">
+              <i class="fas fa-search"></i>
+          </button>
+      </div>
+      <!-- filter list -->
+      <div>
+          <!-- filter header -->
+          <h5>Categories</h5>
+          <!-- filter list -->
+          <ul class="list list--vr-separator">
+              <li *ngFor="let item of Category let i=index" (click)="getProductsByCategoryId(item.id)" class="link list__item"><i class="link__icon fas fa-angle-right"></i>{{item.name}}</li>
+              
+          </ul>
+      </div>
+      <!-- filter tags -->
+      <div>
+          <!-- filter header -->
+          <h5>Tags</h5>
+          <!-- filter tags -->
+          <div class="tags">
+              <span class="tag">Nike</span>
+              <span class="tag">Travel</span>
+              <span class="tag">Sport</span>
+              <span class="tag">Tv</span>
+              <span class="tag">Used</span>
+              <br>
+              <span class="tag">Books</span>
+              <span class="tag">Tech</span>
+              <span class="tag">Addidas</span>
+              <span class="tag">Promo</span>
+              <br>
+              <span class="tag">Reading</span>
+              <span class="tag">Social</span>
+              <span class="tag">New</span>
+              <span class="tag">Special</span>
+              <br>
+              <span class="tag">Food</span>
+              
+          </div>
+      </div>
+      <!-- related items -->
+      <div>
+          <!-- title -->
+          <h5></h5>
+          <!-- small item -->
+          <div></div>
+          <div></div>
+          <div></div>
+      </div>
+  </section>
+  <!-- Items -->
+  <section class="item-listing">
+      <!-- tools (sorting , change view , exporting) -->
+      <div class="item-listing__tools">
+          <select class="form-control" name="" id="">
+              <option value="1" (click)="sortByFeatcher()">Featured</option>
+              <option value="2" (click)="sortByPriceLow()">Price low to high</option>
+              <option value="3" (click)="sortByPriceHigh()">Price high to low</option>
+              <option value="4" (click)="sortByName()">Name</option>
+          </select>
+          <a class="action-btn" [routerLink]="['/product','add']">
+              <i class="fas fa-plus"></i>
+          </a>
+      </div>
+      <!-- items -->
+      <div class="item-listing__items item-listing--3items">
+        <!-- medium item -->
+        <app-product-items *ngFor='let pro of getSliceArrayOfProduct()' [product]='pro' class="item-medium-1"></app-product-items>
+        
+      </div>
+      <!-- paging -->
+      <div class="paging">
+          <!-- left arrow -->
+          <div class="paging__arrow">
+              <i class="fas fa-angle-left"></i>
+          </div>
+          <!-- page number -->
+          <div *ngFor="let page of padgeNumpers; let i=index" class="paging__number" [ngClass]="{'active': i==currentPage}" (click)="currentPage=i"> {{i}} </div>
+          
+          <!-- right arrow -->
+          <div class="paging__arrow">
+              <i class="fas fa-angle-right"></i>
+          </div>
+      </div>
+  </section>
+</div>
